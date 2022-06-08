@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="1654711563419-1" author="pawel (generated)">
+        <createTable tableName="exercise">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_exercise"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-2" author="pawel (generated)">
+        <createTable tableName="exercise_set">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_exerciseset"/>
+            </column>
+            <column name="reps" type="BIGINT"/>
+            <column name="weight" type="BIGINT"/>
+            <column name="is_completed" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-3" author="pawel (generated)">
+        <createTable tableName="exercise_sets">
+            <column name="exercise_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sets_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-4" author="pawel (generated)">
+        <createTable tableName="exercise_template">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_exercisetemplate"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-5" author="pawel (generated)">
+        <createTable tableName="exercise_template_sets">
+            <column name="exercise_template_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sets_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-6" author="pawel (generated)">
+        <createTable tableName="workout">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_workout"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-7" author="pawel (generated)">
+        <createTable tableName="workout_exercises">
+            <column name="workout_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exercises_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-8" author="pawel (generated)">
+        <createTable tableName="workout_template">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_workouttemplate"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-9" author="pawel (generated)">
+        <createTable tableName="workout_template_exercise_templates">
+            <column name="workout_template_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exercise_templates_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1654711563419-10" author="pawel (generated)">
+        <addUniqueConstraint columnNames="sets_id" constraintName="uc_exercise_sets_sets" tableName="exercise_sets"/>
+    </changeSet>
+    <changeSet id="1654711563419-11" author="pawel (generated)">
+        <addUniqueConstraint columnNames="sets_id" constraintName="uc_exercise_template_sets_sets"
+                             tableName="exercise_template_sets"/>
+    </changeSet>
+    <changeSet id="1654711563419-12" author="pawel (generated)">
+        <addUniqueConstraint columnNames="exercises_id" constraintName="uc_workout_exercises_exercises"
+                             tableName="workout_exercises"/>
+    </changeSet>
+    <changeSet id="1654711563419-13" author="pawel (generated)">
+        <addUniqueConstraint columnNames="exercise_templates_id"
+                             constraintName="uc_workout_template_exercise_templates_exercisetemplates"
+                             tableName="workout_template_exercise_templates"/>
+    </changeSet>
+    <changeSet id="1654711563419-14" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="exercise_id" baseTableName="exercise_sets"
+                                 constraintName="fk_exeset_on_exercise" referencedColumnNames="id"
+                                 referencedTableName="exercise"/>
+    </changeSet>
+    <changeSet id="1654711563419-15" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="sets_id" baseTableName="exercise_sets"
+                                 constraintName="fk_exeset_on_exercise_set" referencedColumnNames="id"
+                                 referencedTableName="exercise_set"/>
+    </changeSet>
+    <changeSet id="1654711563419-16" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="sets_id" baseTableName="exercise_template_sets"
+                                 constraintName="fk_exetemset_on_exercise_set" referencedColumnNames="id"
+                                 referencedTableName="exercise_set"/>
+    </changeSet>
+    <changeSet id="1654711563419-17" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="exercise_template_id" baseTableName="exercise_template_sets"
+                                 constraintName="fk_exetemset_on_exercise_template" referencedColumnNames="id"
+                                 referencedTableName="exercise_template"/>
+    </changeSet>
+    <changeSet id="1654711563419-18" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="exercises_id" baseTableName="workout_exercises"
+                                 constraintName="fk_worexe_on_exercise" referencedColumnNames="id"
+                                 referencedTableName="exercise"/>
+    </changeSet>
+    <changeSet id="1654711563419-19" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="workout_id" baseTableName="workout_exercises"
+                                 constraintName="fk_worexe_on_workout" referencedColumnNames="id"
+                                 referencedTableName="workout"/>
+    </changeSet>
+    <changeSet id="1654711563419-20" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="exercise_templates_id"
+                                 baseTableName="workout_template_exercise_templates"
+                                 constraintName="fk_wortemexetem_on_exercise_template" referencedColumnNames="id"
+                                 referencedTableName="exercise_template"/>
+    </changeSet>
+    <changeSet id="1654711563419-21" author="pawel (generated)">
+        <addForeignKeyConstraint baseColumnNames="workout_template_id"
+                                 baseTableName="workout_template_exercise_templates"
+                                 constraintName="fk_wortemexetem_on_workout_template" referencedColumnNames="id"
+                                 referencedTableName="workout_template"/>
+    </changeSet>
+</databaseChangeLog>
